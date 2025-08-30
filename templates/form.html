@@ -2,95 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Client Agreement Generator</title>
+    <title>Powell CM Solutions – Contract Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <div class="container">
-    <h1>Client Engagement Agreement</h1>
+    <h1>Contract Generator</h1>
     <form method="POST">
-        <label>Client Name</label>
-        <input type="text" name="client_name" required>
 
+        <!-- Core Details -->
+        <label>Effective Date</label>
+        <input type="text" name="effective_date" placeholder="e.g., August 30, 2025" required>
+
+        <label>Client Legal Name</label>
+        <input type="text" name="client_legal_name" required>
+
+        <label>Your Firm Legal Name</label>
+        <input type="text" name="firm_legal_name" value="Powell CM Solutions, LLC">
+
+        <label>Project Name</label>
+        <input type="text" name="project_name" required>
+
+        <label>Term</label>
+        <input type="text" name="term" placeholder="e.g., Sept 1, 2025 – June 30, 2026">
+
+        <!-- Role -->
         <label>Role</label>
         <select name="role">
-            <option value="Owner">Owner</option>
-            <option value="Developer">Developer</option>
-            <option value="Contractor">Contractor</option>
+            <option value="Owner’s Representative">Owner’s Representative</option>
+            <option value="Program Manager">Program Manager</option>
+            <option value="Construction Manager (Advisor)">Construction Manager (Advisor)</option>
+            <option value="Developer Advisory">Developer Advisory</option>
+            <option value="Subconsultant">Subconsultant</option>
         </select>
 
-        <label>Scope of Work</label>
-        <textarea name="scope" rows="4" required></textarea>
+        <!-- Relationship -->
+        <label>Relationship</label>
+        <select name="relationship">
+            <option value="Prime">Prime</option>
+            <option value="Subconsultant">Subconsultant</option>
+        </select>
 
-        <label>Form of Payment</label>
-        <select name="payment_type" onchange="toggleRate(this.value)">
+        <!-- Compensation -->
+        <label>Compensation Method</label>
+        <select name="compensation_method" onchange="toggleHourly(this.value)">
             <option value="Hourly">Hourly</option>
             <option value="Lump Sum">Lump Sum</option>
+            <option value="Hybrid">Hybrid</option>
         </select>
 
-        <div id="hourly_rate">
-            <label>Hourly Rate ($)</label>
-            <input type="number" name="hourly_rate" step="0.01">
+        <div id="hourly_cap">
+            <label>If Hourly, Not-to-Exceed Amount ($)</label>
+            <input type="number" name="hourly_cap" step="0.01">
         </div>
 
-        <label>Total Payment Amount ($)</label>
-        <input type="number" name="total_payment" step="0.01">
-
-        <label>Start Date</label>
-        <input type="date" name="start_date">
-
-        <label>End Date</label>
-        <input type="date" name="end_date">
-
-        <label>Termination Clause</label>
-        <textarea name="termination_clause"></textarea>
-
-        <label>Indemnification</label>
-        <select name="indemnification">
-            <option value="Mutual">Mutual</option>
-            <option value="Client Only">Client Only</option>
-            <option value="Contractor Only">Contractor Only</option>
+        <!-- Insurance -->
+        <label>Insurance Tier</label>
+        <select name="insurance_tier">
+            <option value="Standard">Standard</option>
+            <option value="Expanded">Expanded</option>
+            <option value="Reduced">Reduced</option>
         </select>
 
-        <label>Confidentiality</label>
-        <select name="confidentiality">
+        <!-- Dispute Resolution -->
+        <label>Dispute Resolution</label>
+        <select name="dispute_resolution">
+            <option value="Litigation">Litigation</option>
+            <option value="Arbitration">Arbitration</option>
+            <option value="Mediation-then-Court">Mediation-then-Court</option>
+        </select>
+
+        <!-- Venue -->
+        <label>Venue County</label>
+        <input type="text" name="venue_county" value="Cook County">
+
+        <label>Venue State</label>
+        <input type="text" name="venue_state" value="Illinois">
+
+        <label>Venue City (for arbitration seat)</label>
+        <input type="text" name="venue_city" value="Chicago">
+
+        <!-- Optional Clauses -->
+        <label>Payment Terms - Net Days</label>
+        <input type="number" name="payment_terms_days" value="30">
+
+        <label>Termination Notice Days</label>
+        <input type="number" name="termination_notice_days" value="15">
+
+        <label>Limitation of Liability Multiplier (x fees)</label>
+        <input type="number" name="liability_multiplier" value="2">
+
+        <label>Annual Rate Increase Cap (%)</label>
+        <input type="number" name="annual_rate_increase_cap" value="4">
+
+        <label>Deliverables Ownership</label>
+        <select name="deliverables_ownership">
+            <option value="License">License</option>
+            <option value="Assignment">Assignment</option>
+        </select>
+
+        <label>Include Short Mutual NDA?</label>
+        <select name="include_nda">
             <option value="Yes">Yes</option>
             <option value="No">No</option>
         </select>
 
-        <label>IP Assignment</label>
-        <select name="ip_assignment">
-            <option value="Assign">Assign to Client</option>
-            <option value="License">License to Client</option>
+        <label>Include Inclusion/Non-Discrimination Statement?</label>
+        <select name="include_inclusion">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
         </select>
 
-        <label>Reimbursable Expenses</label>
-        <textarea name="reimbursable_expenses"></textarea>
-
-        <label>Inclusion Goals</label>
-        <textarea name="inclusion_goals"></textarea>
-
-        <label>Invoice Terms</label>
-        <input type="text" name="invoice_terms" placeholder="e.g., Net 30">
-
-        <label>Insurance Type</label>
-        <select name="insurance_type">
-            <option value="Standard">Standard</option>
-            <option value="Expanded">Expanded</option>
+        <label>Include Additional Insured Language?</label>
+        <select name="include_additional_insured">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
         </select>
-
-        <label>Additional Insured</label>
-        <input type="text" name="additional_insured">
 
         <button type="submit">Generate Contract</button>
     </form>
 </div>
 
 <script>
-function toggleRate(value) {
-    document.getElementById('hourly_rate').style.display = value === 'Hourly' ? 'block' : 'none';
+function toggleHourly(value) {
+    document.getElementById('hourly_cap').style.display = value === 'Hourly' ? 'block' : 'none';
 }
-window.onload = () => toggleRate(document.querySelector('select[name="payment_type"]').value);
+window.onload = () => toggleHourly(document.querySelector('select[name="compensation_method"]').value);
 </script>
 </body>
 </html>
