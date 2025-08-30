@@ -1,0 +1,48 @@
+<form method="POST">
+    <label>Client Name:</label>
+    <input type="text" name="client_name" required>
+
+    <label>Role:</label>
+    <select name="role">
+        <option value="Owner">Owner</option>
+        <option value="Developer">Developer</option>
+        <option value="Contractor">Contractor</option>
+    </select>
+
+    <label>Scope of Work:</label>
+    <textarea name="scope" rows="4" required></textarea>
+
+    <label>Form of Payment:</label>
+    <select name="payment_type" onchange="toggleRate(this.value)">
+        <option value="Hourly">Hourly</option>
+        <option value="Lump Sum">Lump Sum</option>
+    </select>
+
+    <div id="hourly_rate">
+        <label>Hourly Rate ($):</label>
+        <input type="number" name="hourly_rate" step="0.01">
+    </div>
+
+    <label>Total Payment Amount ($):</label>
+    <input type="number" name="total_payment" step="0.01">
+
+    <label>Insurance Requirements:</label>
+    <textarea name="insurance" rows="3" placeholder="Describe coverage or upload exhibit"></textarea>
+
+    <label>Project Personnel:</label>
+    <textarea name="personnel" rows="3" placeholder="List names, titles, and responsibilities"></textarea>
+
+    <label>Term of Engagement:</label>
+    <input type="date" name="start_date"> to <input type="date" name="end_date">
+
+    <label>Include Indemnification Clause:</label>
+    <input type="checkbox" name="indemnification" value="Yes">
+
+    <label>Include Confidentiality Clause:</label>
+    <input type="checkbox" name="confidentiality" value="Yes">
+
+    <label>Inclusion Goals (optional):</label>
+    <textarea name="inclusion" rows="3" placeholder="e.g., 50% MBE participation"></textarea>
+
+    <button type="submit">Generate Agreement</button>
+</form>
