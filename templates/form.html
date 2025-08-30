@@ -36,8 +36,51 @@
         <label>Total Payment Amount ($)</label>
         <input type="number" name="total_payment" step="0.01">
 
-        <label>Insurance Exhibit</label>
-        <textarea name="insurance" rows="3"></textarea>
+        <label>Start Date</label>
+        <input type="date" name="start_date">
+
+        <label>End Date</label>
+        <input type="date" name="end_date">
+
+        <label>Termination Clause</label>
+        <textarea name="termination_clause"></textarea>
+
+        <label>Indemnification</label>
+        <select name="indemnification">
+            <option value="Mutual">Mutual</option>
+            <option value="Client Only">Client Only</option>
+            <option value="Contractor Only">Contractor Only</option>
+        </select>
+
+        <label>Confidentiality</label>
+        <select name="confidentiality">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>IP Assignment</label>
+        <select name="ip_assignment">
+            <option value="Assign">Assign to Client</option>
+            <option value="License">License to Client</option>
+        </select>
+
+        <label>Reimbursable Expenses</label>
+        <textarea name="reimbursable_expenses"></textarea>
+
+        <label>Inclusion Goals</label>
+        <textarea name="inclusion_goals"></textarea>
+
+        <label>Invoice Terms</label>
+        <input type="text" name="invoice_terms" placeholder="e.g., Net 30">
+
+        <label>Insurance Type</label>
+        <select name="insurance_type">
+            <option value="Standard">Standard</option>
+            <option value="Expanded">Expanded</option>
+        </select>
+
+        <label>Additional Insured</label>
+        <input type="text" name="additional_insured">
 
         <button type="submit">Generate Contract</button>
     </form>

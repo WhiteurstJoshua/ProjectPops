@@ -8,17 +8,8 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
-        data = {
-            'client_name': request.form['client_name'],
-            'role': request.form['role'],
-            'scope': request.form['scope'],
-            'payment_type': request.form['payment_type'],
-            'hourly_rate': request.form.get('hourly_rate', ''),
-            'total_payment': request.form['total_payment'],
-            'insurance': request.form['insurance']
-        }
+        data = request.form.to_dict()
 
-        # Create a temporary file for the generated contract
         temp_path = tempfile.mktemp(suffix=".docx")
         contract_generator.build_agreement(data, output_path=temp_path)
 
